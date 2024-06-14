@@ -1,4 +1,4 @@
-import redis, { Redis } from "ioredis";
+import { Redis } from "ioredis";
 
 export const getRedisInstance = () => {
     const instance = new Redis({
