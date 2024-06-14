@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors"
 import { getRedisInstance } from "./redis.js";
+import dotenv from 'dotenv';
+
+dotenv.config({path: '../.env'});
 
 const app = express();
 
