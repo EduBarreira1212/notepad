@@ -36,7 +36,7 @@ window.addEventListener("load", async () => {
 if(serverNameURL){
     const channel = pusher.subscribe(serverNameURL);
     channel.bind("updated-note", data => {
-        if (data.content) {
+        if (data.content && data.userId !== pusher.sessionID) {
             serverTextArea.value = data.content;
         }
     });
