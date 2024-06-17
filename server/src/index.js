@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"
 import { getRedisInstance } from "./redis.js";
 import dotenv from 'dotenv';
+import pusher from "./pusher.js";
 
 dotenv.config({path: '../.env'});
 
@@ -22,6 +23,7 @@ app.post("/api/update-notepad", (req, res) => {
 
     const expire = 60000 * 60 * 24;
 
+    pusher.trigger(noteName, "updated-note", noteObj);
     redisInstance.set(noteName, JSON.stringify(noteObj), "PX", expire);
     res.status(200).send(noteObj);
 })
