@@ -5,6 +5,12 @@ const searchParams = new URLSearchParams(window.location.search);
 const serverNameURL = searchParams.get("name");
 serverName.textContent = serverNameURL
 
+Pusher.logToConsole = true;
+
+const pusher = new Pusher('903e264e874adc3e1f6b', {
+  cluster: 'us2'
+});
+
 serverTextArea.addEventListener("keyup", async (event) => {
     console.log("Change");
 
@@ -15,7 +21,7 @@ serverTextArea.addEventListener("keyup", async (event) => {
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify({noteName: serverNameURL, noteContent: value})
+        body: JSON.stringify({noteName: serverNameURL, noteContent: value, userId: pusher.sessionID})
     })
 })
 
@@ -26,3 +32,12 @@ window.addEventListener("load", async () => {
 
     console.log(data);
 })
+
+if(serverNameURL){
+    const channel = pusher.subscribe(serverNameURL);
+    channel.bind("updated-note", data => {
+        if (data.content) {
+            serverTextArea.value = data.content;
+        }
+    });
+}
