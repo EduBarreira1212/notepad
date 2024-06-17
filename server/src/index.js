@@ -13,12 +13,13 @@ app.use(express.json());
 app.use(cors())
 
 app.post("/api/update-notepad", (req, res) => {
-    const {noteName, noteContent} = req.body;
+    const {noteName, noteContent, userId} = req.body;
 
     const redisInstance = getRedisInstance();
 
     const noteObj = {
         content: noteContent,
+        userId,
     }
 
     const expire = 60000 * 60 * 24;
