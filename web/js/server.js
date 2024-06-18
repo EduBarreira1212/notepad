@@ -7,7 +7,7 @@ serverName.textContent = serverNameURL
 
 Pusher.logToConsole = true;
 
-const pusher = new Pusher('903e264e874adc3e1f6b', {
+const pusher = new Pusher('7618bc1ca4744eea6825', {
   cluster: 'us2'
 });
 
