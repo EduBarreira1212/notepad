@@ -43,6 +43,24 @@ app.get("/api/get-notepad/:noteName", async (req, res) => {
     return res.sendStatus(404);
 })
 
+app.post("/pusher/auth", (req, res) => {
+    const socketId = req.body.socket_id;
+    const user_id = req.body.user_id;
+    const username = req.body.username;
+    const channelName = req.body.channel_name;
+
+    const data = {
+        user_id,
+        user_info: {
+            id: user_id,
+            username,
+        }
+    }
+
+    const authorizedUser = pusher.authorizeChannel(socketId, channelName, data);
+    return res.status(200).send(authorizedUser);
+})
+
 app.post("/pusher/authenticate", async (req, res) => {
     const socketId = req.body.socket_id;
     const userId = req.body.user_id;
@@ -54,7 +72,6 @@ app.post("/pusher/authenticate", async (req, res) => {
     }
 
     const pusherUser = await pusher.authenticateUser(socketId, user);
-    console.log(pusherUser);
     return res.status(200).send(pusherUser);
 })
 
