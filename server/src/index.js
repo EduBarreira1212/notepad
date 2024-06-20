@@ -43,6 +43,21 @@ app.get("/api/get-notepad/:noteName", async (req, res) => {
     return res.sendStatus(404);
 })
 
+app.post("/pusher/authenticate", async (req, res) => {
+    const socketId = req.body.socket_id;
+    const userId = req.body.user_id;
+    const username = req.body.username;
+
+    const user = {
+        id: userId,
+        name: username,
+    }
+
+    const pusherUser = await pusher.authenticateUser(socketId, user);
+    console.log(pusherUser);
+    return res.status(200).send(pusherUser);
+})
+
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
