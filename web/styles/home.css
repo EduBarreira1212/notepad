@@ -6,7 +6,7 @@ body{
     gap: 2vh;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
+    margin: 25vh 0 0 0;
     padding: 2vh 2vw;
 }
 
@@ -15,10 +15,24 @@ label{
 }
 
 input{
-    width: 15vw;
+    width: 15rem;
     padding: 1vh 1vw;
     margin-bottom: 1vh;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 1vh 2vw;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover{
+    background-color: #45a049;
 }
