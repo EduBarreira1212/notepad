@@ -10,6 +10,15 @@ body{
     padding: 2vh 2vw;
 }
 
-input{
+label{
     font-weight: bold;
+}
+
+input{
+    width: 15vw;
+    padding: 1vh 1vw;
+    margin-bottom: 1vh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
