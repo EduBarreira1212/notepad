@@ -71,7 +71,7 @@ app.post("/pusher/authenticate", async (req, res) => {
         name: username,
     }
 
-    const pusherUser = await pusher.authenticateUser(socketId, user);
+    const pusherUser = pusher.authenticateUser(socketId, user);
     return res.status(200).send(pusherUser);
 })
 
