@@ -6,10 +6,12 @@ const searchParams = new URLSearchParams(window.location.search);
 const serverNameURL = searchParams.get("name");
 serverName.textContent = serverNameURL
 
+const baseURL = "https://notepad-hbva.onrender.com";
+
 const pusher = new Pusher('7618bc1ca4744eea6825', {
   cluster: 'us2',
   channelAuthorization: {
-    endpoint: "http://localhost:3000/pusher/auth",
+    endpoint: `${baseURL}/pusher/auth`,
     paramsProvider: () => {
         return {
             user_id: localStorage.getItem("user_id"),
@@ -18,7 +20,7 @@ const pusher = new Pusher('7618bc1ca4744eea6825', {
     }
   },
   userAuthentication: {
-    endpoint: "http://localhost:3000/pusher/authenticate",
+    endpoint: `${baseURL}/pusher/authenticate`,
     paramsProvider: () => {
         return {
             user_id: localStorage.getItem("user_id"),
@@ -31,7 +33,7 @@ const pusher = new Pusher('7618bc1ca4744eea6825', {
 serverTextArea.addEventListener("keyup", async (event) => {
     const { value } = event.target;
 
-    await fetch(`http://localhost:3000/api/update-notepad`, {
+    await fetch(`${baseURL}/api/update-notepad`, {
         method: "POST",
         headers: {
             "content-type": "application/json"
@@ -41,7 +43,7 @@ serverTextArea.addEventListener("keyup", async (event) => {
 })
 
 window.addEventListener("load", async () => {
-    const data = await fetch(`http://localhost:3000/api/get-notepad/${serverNameURL}`).then(res => res.json());
+    const data = await fetch(`${baseURL}/api/get-notepad/${serverNameURL}`).then(res => res.json());
 
     serverTextArea.value = data.content;
 })
