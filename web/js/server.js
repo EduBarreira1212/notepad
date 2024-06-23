@@ -3,8 +3,9 @@ const userQty = document.getElementById("users-quantity");
 const serverTextArea = document.getElementById("server-text-area");
 
 const searchParams = new URLSearchParams(window.location.search);
-const serverNameURL = searchParams.get("name");
-serverName.textContent = serverNameURL
+serverName.textContent = searchParams.get("name");
+const serverNameURL = `presence-${searchParams.get("name")}`;
+
 
 const baseURL = "https://notepad-hbva.onrender.com";
 
