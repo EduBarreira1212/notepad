@@ -1,6 +1,7 @@
 const serverName = document.getElementById("server-name");
 const userQty = document.getElementById("users-quantity");
 const serverTextArea = document.getElementById("server-text-area");
+const usersList = document.getElementById("users-list");
 
 const searchParams = new URLSearchParams(window.location.search);
 serverName.textContent = searchParams.get("name");
@@ -61,13 +62,33 @@ if(serverNameURL){
 
     channel.bind("pusher:member_added", () => {
         userQty.textContent = Number(userQty.textContent) + 1;
+        usersList.textContent = "";
+        for (const user in channel.members.members) {
+            const username = user.split("-")[0];
+            const li = document.createElement("li");
+            li.textContent = username;
+            usersList.append(li);
+        }
     })
 
     channel.bind("pusher:member_removed", () => {
         userQty.textContent = Number(userQty.textContent) - 1;
+        usersList.textContent = "";
+        for (const user in channel.members.members) {
+            const username = user.split("-")[0];
+            const li = document.createElement("li");
+            li.textContent = username;
+            usersList.append(li);
+        }
     })
 
     channel.bind("pusher:subscription_succeeded", () => {
         userQty.textContent = channel.members.count;
+        for (const user in channel.members.members) {
+            const username = user.split("-")[0];
+            const li = document.createElement("li");
+            li.textContent = username;
+            usersList.append(li);
+        }
     })
 }
