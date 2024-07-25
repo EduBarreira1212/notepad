@@ -5,8 +5,8 @@ let instance;
 export const getRedisInstance = () => {
     if(!instance){
         instance = new Redis({
-            host: "redis-15251.c276.us-east-1-2.ec2.redns.redis-cloud.com",
-            port: "15251",
+            host: "redis-15971.c232.us-east-1-2.ec2.redns.redis-cloud.com",
+            port: "15971",
             username: "default",
             password: process.env.DB_PASSWORD
         });
